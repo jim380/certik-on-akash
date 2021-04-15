@@ -2,7 +2,7 @@
 
 pushd /node
 
-export CERTIK_HOME="~/.certik"
+export CERTIK_HOME="{PWD?}"
 
 
 # This fails immediately, but creates the node keys
@@ -33,7 +33,7 @@ curl -s "${GENESIS_URL?}" > $CERTIK_HOME/config/genesis.json
 cat config.toml | python3 -u ./patch_config_toml.py > $CERTIK_HOME/config/config.toml
 
 # Copy over all the other filesthat the node needs
-cp -v app.toml ~/.certik/config/
+cp -v app.toml $CERTIK_HOME/config/
 
 # Run the node for real now 
-exec certik start --home ~/.certik
+exec certik start --home $CERTIK_HOME
