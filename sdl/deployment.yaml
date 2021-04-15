@@ -3,7 +3,7 @@ version: "2.0"
 
 services:
   akash:
-    image: ghcr.io/certikfoundation/shentu:latest
+    image: jim380/certik-on-akash:v0.1
     env:
       # - STATE_SYNC=1
       - SEEDS_URL=https://raw.githubusercontent.com/certikfoundation/testnet/master/yulei-2/seeds.txt
