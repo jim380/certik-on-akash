@@ -2,11 +2,11 @@
 
 pushd /node
 
-export CERTIK_HOME="${PWD?}"
+export CERTIK_HOME="~/.certik"
 
 
 # This fails immediately, but creates the node keys
-certik init "${CERTIK_MONIKER:-unknown}" --home ~/.certik
+certik init "${CERTIK_MONIKER:-unknown}" --home $CERTIK_HOME
 
 set -xe
 
@@ -20,17 +20,17 @@ set -xe
 
 if test -n "$ENABLE_ID_SERVER" ; then
   mkdir web
-  certik tendermint show-node-id   > web/node-id.txt
-  certik tendermint show-validator > web/validator-pubkey.txt
+  certik tendermint show-node-id --home $CERTIK_HOME > web/node-id.txt
+  certik tendermint show-validator --home $CERTIK_HOME > web/validator-pubkey.txt
   pushd web
   # Run a web server so that the file can be retrieved
   python3 -m http.server 8080 &
   popd
 fi
 
-curl -s "${GENESIS_URL?}" > ~/.certik/config/genesis.json
+curl -s "${GENESIS_URL?}" > $CERTIK_HOME/config/genesis.json
 
-cat config.toml | python3 -u ./patch_config_toml.py > ~/.certik/config/config.toml
+cat config.toml | python3 -u ./patch_config_toml.py > $CERTIK_HOME/config/config.toml
 
 # Copy over all the other filesthat the node needs
 cp -v app.toml ~/.certik/config/
