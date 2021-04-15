@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 docker run \
-  --env-file env/definet \
+  --env-file env/mainnet \
   --publish-all \
-  --name akash-on-akash \
+  --name certik-on-akash \
   --rm \
-  akash-on-akash:local
+  certik-on-akash:local

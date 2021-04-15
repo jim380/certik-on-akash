@@ -1,0 +1,14 @@
+STATE_SYNC=1
+SEEDS_URL=https://raw.githubusercontent.com/certikfoundation/testnet/master/yulei-2/seeds.txt
+SYNC_URL=https://raw.githubusercontent.com/certikfoundation/testnet/master/yulei-2/rpc.txt
+GENESIS_URL=https://raw.githubusercontent.com/certikfoundation/testnet/master/yulei-2/genesis.json
+CERTIK_P2P_PEX=true
+PEX=1
+CERTIK_MONIKER=certik_test
+CERTIK_PRUNING=custom
+CERTIK_PRUNING_INTERVAL=10
+CERTIK_PRUNING_KEEP_EVERY=50
+CERTIK_PRUNING_KEEP_RECENT=10
+CERTIK_STATE_SYNC_SNAPSHOT_INTERVAL=50
+CERTIK_STATE_SYNC_KEEP_RECENT=10
+CERTIK_SEED_MODE=true

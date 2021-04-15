@@ -3,19 +3,20 @@ version: "2.0"
 
 services:
   akash:
-    image: ghcr.io/ovrclk/akash-on-akash:v0.0.8
+    image: ghcr.io/certikfoundation/shentu:latest
     env:
-      - SEEDS_URL=https://raw.githubusercontent.com/ovrclk/net/master/mainnet/seed-nodes.txt
-      - SYNC_URL=https://raw.githubusercontent.com/ovrclk/net/master/mainnet/rpc-nodes.txt
-      - GENESIS_URL=https://raw.githubusercontent.com/ovrclk/net/master/mainnet/genesis.json
       # - STATE_SYNC=1
-      # - AKASH_PRUNING=custom
-      # - AKASH_PRUNING_INTERVAL=10
-      # - AKASH_PRUNING_KEEP_EVERY=50
-      # - AKASH_PRUNING_KEEP_RECENT=10
-      # - AKASH_STATE_SYNC_SNAPSHOT_INTERVAL=50
-      # - AKASH_STATE_SYNC_KEEP_RECENT=10
-      # - AKASH_SEED_MODE=true
+      - SEEDS_URL=https://raw.githubusercontent.com/certikfoundation/testnet/master/yulei-2/seeds.txt
+      - SYNC_URL=https://raw.githubusercontent.com/certikfoundation/testnet/master/yulei-2/rpc.txt
+      - GENESIS_URL=https://raw.githubusercontent.com/certikfoundation/testnet/master/yulei-2/genesis.json
+      - ENABLE_ID_SERVER=true
+      # - CERTIK_PRUNING=custom
+      # - CERTIK_PRUNING_INTERVAL=10
+      # - CERTIK_PRUNING_KEEP_EVERY=50
+      # - CERTIK_PRUNING_KEEP_RECENT=10
+      # - CERTIK_STATE_SYNC_SNAPSHOT_INTERVAL=50
+      # - CERTIK_STATE_SYNC_KEEP_RECENT=10
+      # - CERTIK_SEED_MODE=true
     expose:
       - port: 1317
         as: 80
@@ -24,7 +25,7 @@ services:
 
 profiles:
   compute:
-    akash:
+    certik:
       resources:
         cpu:
           units: 1
@@ -36,16 +37,13 @@ profiles:
     dcloud:
       attributes:
         host: akash
-      signedBy:
-        anyOf:
-          - akash1365yvmc4s7awdyj3n2sav7xfx76adc6dnmlx63
       pricing:
         akash: 
           denom: uakt
-          amount: 100
+          amount: 200
 
 deployment:
   akash:
     dcloud:
-      profile: akash
+      profile: certik
       count: 1

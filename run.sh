@@ -2,11 +2,11 @@
 
 pushd /node
 
-export AKASH_HOME="${PWD?}"
+export CERTIK_HOME="${PWD?}"
 
 
 # This fails immediately, but creates the node keys
-akash init "${AKASH_MONIKER:-unknown}"
+certik init "${CERTIK_MONIKER:-unknown}" --home ~/.certik
 
 set -xe
 
@@ -20,20 +20,20 @@ set -xe
 
 if test -n "$ENABLE_ID_SERVER" ; then
   mkdir web
-  akash tendermint show-node-id   > web/node-id.txt
-  akash tendermint show-validator > web/validator-pubkey.txt
+  certik tendermint show-node-id   > web/node-id.txt
+  certik tendermint show-validator > web/validator-pubkey.txt
   pushd web
   # Run a web server so that the file can be retrieved
   python3 -m http.server 8080 &
   popd
 fi
 
-curl -s "${GENESIS_URL?}" > config/genesis.json
+curl -s "${GENESIS_URL?}" > ~/.certik/config/genesis.json
 
-cat config.toml | python3 -u ./patch_config_toml.py > config/config.toml
+cat config.toml | python3 -u ./patch_config_toml.py > ~/.certik/config/config.toml
 
 # Copy over all the other filesthat the node needs
-cp -v app.toml config/
+cp -v app.toml ~/.certik/config/
 
 # Run the node for real now 
-exec akash start
+exec certik start --home ~/.certik

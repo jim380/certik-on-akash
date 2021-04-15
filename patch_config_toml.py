@@ -68,7 +68,7 @@ if state_sync_enable:
   trust_hash = None
   for sync_server in sync_servers:
     sys.stderr.write("Querying RPC server for latest block: %s\n" % (sync_server,))
-    cmd = 'akash'
+    cmd = 'certik'
     args = ['', 'query', 'block', '--node','tcp://%s' % (sync_server,)]
     with open('/tmp/blocks.json', 'w') as fout:
       proc = subprocess.Popen(executable = cmd, args = args, stdin = subprocess.DEVNULL, stdout = fout, shell = False)
